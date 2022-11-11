@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -226,6 +227,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean checkCamStoragePer() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return checkPermission(
+                    Manifest.permission.READ_MEDIA_VIDEO, Manifest.permission.CAMERA);
+        }
         return checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA);
     }
 
